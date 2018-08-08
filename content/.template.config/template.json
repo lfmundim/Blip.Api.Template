@@ -1,8 +1,11 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Lucas Mundim",
-  "classifications": [ "Common", "Api", "ASP.NET Core", "BLiP" ],
+  "classifications": [ "API", "ASP.NET Core", "BLiP" ],
   "identity": "Blip.Api.Template",
   "name": "BLiP API Template",
-  "shortName": "blip-api"
+  "shortName": "blip-api",
+  "tags":{
+    "language": "C#" 
+  }
 }
