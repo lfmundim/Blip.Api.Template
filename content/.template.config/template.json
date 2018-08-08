@@ -7,5 +7,7 @@
   "shortName": "blip-api",
   "tags":{
     "language": "C#" 
-  }
+  },
+  "sourceName": "Blip.Api.Template",
+  "preferNameDirectory": true
 }
