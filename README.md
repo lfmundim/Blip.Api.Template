@@ -1,4 +1,4 @@
-# BLiP.API.Template
+# BLiP.API.Template ![release_badge](https://img.shields.io/badge/release-v1.0.5-brightgreen.svg)
 
 ## This template aims to kickstart the development of an API to be used alongside BLiP's Builder feature
 
