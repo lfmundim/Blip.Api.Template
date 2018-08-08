@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Blip.Api.Template</id>
-    <version>1.0.1</version>
+    <version>1.0.5</version>
     <description>
       Starts a new BLiP API project
     </description>
