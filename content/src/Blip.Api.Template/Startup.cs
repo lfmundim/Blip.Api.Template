@@ -55,9 +55,8 @@ namespace Blip.Api.Template
             services.AddSingleton<ILogger>(new LoggerConfiguration()
                      .ReadFrom.Configuration(Configuration)
                      .Enrich.WithMachineName()
-                     .Enrich.WithProperty("Application", "BotName")
+                     .Enrich.WithProperty("Application", "Blip.Api.Template")
                      .Enrich.WithExceptionDetails()
-                     .MinimumLevel.Debug()
                      .CreateLogger());
 
             // BLiP services registration
@@ -103,8 +102,6 @@ namespace Blip.Api.Template
         /// <param name="settings"></param>
         private void RegisterBlip(IServiceCollection services, MySettings settings)
         {
-            var builder = new BlipClientBuilder().UsingAccessKey(settings.BlipBotSettings.Identifier, settings.BlipBotSettings.AccessKey)
-                                                 .UsingRoutingRule(RoutingRule.Instance);
             services.AddSingleton<ISender, CustomSender>();
             services.AddSingleton<IBucketExtension, BucketExtension>();
             services.AddSingleton<IDirectoryExtension, DirectoryExtension>();

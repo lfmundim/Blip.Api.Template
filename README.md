@@ -17,6 +17,25 @@ dotnet new blip-api
 ```
 Your new project should be created in the open folder.
 
+## File Structure
+```cs
+    📁src
+    |__📁Blip.Api.Template // The Web API project Folder
+    |   |__📁Controllers
+    |   |   |__📃{YourControllers.cs}
+    |   |   |__📃{...}
+    |   |__📁Models
+    |   |   |__📃{YourModelClasses.cs}
+    |   |   |__📃{...}
+    |   |__📁Services
+    |   |   |__📃{YourServicesAndInterfaces.cs}
+    |   |__📃MySettings.cs
+    |   |__📃Startup.cs
+    |   |__📃appsettings.json
+    |__📁Blip.Api.Template.Services // (If needed) The project to use for 3rd party APIs to be consumed
+        |__{Recommended to follow similar structure from the above project}
+```
+
 ## Uninstallation
 To uninstall the template from your local machine, use the command
 ```sh
