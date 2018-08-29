@@ -28,7 +28,7 @@ namespace Blip.Api.Template.Services
 
         public async Task SendCommandAsync(Command command, CancellationToken cancellationToken)
         {
-            //await CheckStarted();
+            await CheckStarted(cancellationToken);
             await _client.SendCommandAsync(command, cancellationToken);
         }
 
