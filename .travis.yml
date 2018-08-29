@@ -1,2 +1,3 @@
 language: csharp
-script: "bundle exec jekyll build"
+script: 
+  - dotnet build src/Blip.Api.Template/Blip.Api.Template.csproj
