@@ -1,4 +1,5 @@
-# BLiP.API.Template ![release_badge](https://img.shields.io/badge/release-v1.0.5-brightgreen.svg)
+# BLiP.API.Template ![release_badge](https://img.shields.io/badge/release-v1.0.11-brightgreen.svg) [![GitHub stars](https://img.shields.io/github/stars/lfmundim/Blip.Api.Template.svg)](https://github.com/lfmundim/Blip.Api.Template/stargazers)
+
 
 ## This template aims to kickstart the development of an API to be used alongside BLiP's Builder feature
 
