@@ -2,4 +2,4 @@ language: csharp
 mono: none
 dotnet: 2.0
 script: 
-  - dotnet build src/Blip.Api.Template/Blip.Api.Template.csproj
+  - dotnet build content/src/Blip.Api.Template/Blip.Api.Template.csproj
