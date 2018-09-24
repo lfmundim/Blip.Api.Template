@@ -1,7 +1,7 @@
 ﻿using Blip.Api.Template.Models;
 using Blip.Api.Template.Services;
-using Lime.Messaging.Resources;
-using Lime.Protocol.Serialization;
+using Blip.HttpClient.Extensions;
+using Lime.Protocol;
 using Lime.Protocol.Serialization.Newtonsoft;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,15 +11,9 @@ using Serilog;
 using Serilog.Exceptions;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using Take.Blip.Client;
-using Take.Blip.Client.Extensions.ArtificialIntelligence;
-using Take.Blip.Client.Extensions.Bucket;
-using Take.Blip.Client.Extensions.Contacts;
-using Take.Blip.Client.Extensions.Directory;
-using Take.Blip.Client.Extensions.EventTracker;
-using Take.Blip.Client.Extensions.Resource;
 
 namespace Blip.Api.Template
 {
@@ -60,7 +54,9 @@ namespace Blip.Api.Template
                      .CreateLogger());
 
             // BLiP services registration
-            RegisterBlip(services, settings);
+            var documentList = new List<Document>();
+            documentList.Add(new UserContext());
+            services.DefaultRegister(settings.BlipBotSettings.Authorization, documentList);
 
             // Project specific Services
             services.AddSingleton<IContextManager, ContextManager>();
@@ -93,26 +89,5 @@ namespace Blip.Api.Template
 
             app.UseMvc();
         }
-
-        #region BLiP's services
-        /// <summary>
-        /// Registers BLiP's most used services
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="settings"></param>
-        private void RegisterBlip(IServiceCollection services, MySettings settings)
-        {
-            services.AddSingleton<ISender, CustomSender>();
-            services.AddSingleton<IBucketExtension, BucketExtension>();
-            services.AddSingleton<IDirectoryExtension, DirectoryExtension>();
-            services.AddSingleton<IContactExtension, ContactExtension>();
-            services.AddSingleton<IResourceExtension, ResourceExtension>();
-            services.AddSingleton<IArtificialIntelligenceExtension, ArtificialIntelligenceExtension>();
-            services.AddSingleton<IEventTrackExtension, EventTrackExtension>();
-            Lime.Messaging.Registrator.RegisterDocuments();
-            Takenet.Iris.Messaging.Registrator.RegisterDocuments();
-            TypeUtil.RegisterDocument<UserContext>();
-        }
-        #endregion
     }
 }

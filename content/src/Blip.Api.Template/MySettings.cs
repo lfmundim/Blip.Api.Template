@@ -27,5 +27,11 @@ namespace Blip.Api.Template
         /// </summary>
         [JsonProperty("AccessKey")]
         public string AccessKey { get; set; }
+
+        /// <summary>
+        /// BLiP's bot Authorization Key
+        /// </summary>
+        [JsonProperty("Authorization")]
+        public string Authorization { get; set; }
     }
 }

@@ -45,5 +45,4 @@ dotnet new -u Blip.Api.Template
 Your current projects that already use the template **will not** be affected.
 
 ## Feature Roadmap
-* Change `CustomSender` methods to `HTTP`
 * Basic controller for external link tracking
