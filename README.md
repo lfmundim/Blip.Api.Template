@@ -34,7 +34,8 @@ Your new project should be created in the open folder.
     |   |__📃Startup.cs
     |   |__📃appsettings.json
     |__📁Blip.Api.Template.Services // (If needed) The project to use for 3rd party APIs to be consumed
-        |__{Recommended to follow similar structure from the above project}
+    |   |__{Recommended to follow similar structure from the above project}
+    |__⚙️.editorconfig
 ```
 
 ## Uninstallation
