@@ -18,6 +18,17 @@ dotnet new blip-api
 ```
 Your new project should be created in the open folder.
 
+### Renaming the `Services` project
+By default, when you create a new solution using the template, all `.csproj` files will use the name of the folder you're in (along with any mentions of `Blip.Api.Template`. You can give the `Services` project a different name should you like it using the CLI param `--Services`. 
+
+For example, if you run the command
+
+```bash
+dotnet new blip-api --Services DifferentName.Services
+```
+
+inside a folder named `Blip.Bot.Project`, it will create a `.sln` with two projects: `Blip.Bot.Project.csproj` and `DifferentName.Services.csproj`, instead of a `Blip.Bot.Project.Services.csproj`.
+
 ## File Structure
 ```cs
     📁src
