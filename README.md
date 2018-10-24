@@ -31,7 +31,8 @@ inside a folder named `Blip.Bot.Project`, it will create a `.sln` with two proje
 
 ## File Structure
 ```cs
-    📁src
+ 📁Blip.Api.Template // assuming your folder is called Blip.Api.Template. Whatever name you choose will replace all occurrences of that string in the sln
+ |__📁src
     |__📁Blip.Api.Template // The Web API project Folder
     |   |__📁Controllers
     |   |   |__📃{YourControllers.cs}
