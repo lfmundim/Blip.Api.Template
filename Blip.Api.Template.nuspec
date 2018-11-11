@@ -2,11 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Blip.Api.Template</id>
-    <version>2.0.0</version>
+    <version>2.0.2.2</version>
     <description>
       Starts a new BLiP API project
     </description>
     <authors>Lucas Mundim</authors>
+	<releaseNotes>
+		Added a parameter to rename the Services project ('--Services newName'). More on the GitHub repo
+	</releaseNotes>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>

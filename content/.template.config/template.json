@@ -8,6 +8,15 @@
   "tags":{
     "language": "C#" 
   },
+  "symbols": {
+    "Services": {
+	  "type": "parameter",
+	  "datatype": "string",
+	  "description": "Defines the name of the Services project",
+	  "FileRename": "Blip.Api.Template.Services",
+	  "defaultValue": "Blip.Api.Template.Services"
+    }
+  },
   "sourceName": "Blip.Api.Template",
   "preferNameDirectory": true
 }
