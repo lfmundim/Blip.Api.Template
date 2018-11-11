@@ -46,12 +46,12 @@ namespace Blip.Api.Template
             services.AddSingleton(settings.BlipBotSettings);
 
             // SERILOG settings
-            services.AddSingleton<ILogger>(new LoggerConfiguration()
-                     .ReadFrom.Configuration(Configuration)
-                     .Enrich.WithMachineName()
-                     .Enrich.WithProperty("Application", "Blip.Api.Template")
-                     .Enrich.WithExceptionDetails()
-                     .CreateLogger());
+            //services.AddSingleton<ILogger>(new LoggerConfiguration()
+            //         .ReadFrom.Configuration(Configuration)
+            //         .Enrich.WithMachineName()
+            //         .Enrich.WithProperty("Application", "Blip.Api.Template")
+            //         .Enrich.WithExceptionDetails()
+            //         .CreateLogger());
 
             // BLiP services registration
             var documentList = new List<Document>();
