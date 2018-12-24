@@ -9,6 +9,8 @@ makefile
 *.user
 *.userosscache
 *.sln.docstates
+Server\*.suo
+Server\sqlite3\storage.ide
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
