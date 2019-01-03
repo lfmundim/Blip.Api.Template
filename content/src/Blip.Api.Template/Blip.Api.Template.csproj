@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.0\Blip.Api.Template.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp2.1\Blip.Api.Template.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netcoreapp2.0\Blip.Api.Template.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netcoreapp2.1\Blip.Api.Template.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,8 +20,8 @@
     <PackageReference Include="Blip.HttpClient" Version="1.0.5" />
     <PackageReference Include="Lime.Protocol" Version="0.8.53-beta" />
     <PackageReference Include="Lime.Protocol.Serialization" Version="0.7.278" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="RestEase" Version="1.4.7" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
