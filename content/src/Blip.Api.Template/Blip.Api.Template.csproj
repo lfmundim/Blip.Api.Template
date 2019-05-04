@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.1\Blip.Api.Template.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp2.2\Blip.Api.Template.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netcoreapp2.1\Blip.Api.Template.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netcoreapp2.2\Blip.Api.Template.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
