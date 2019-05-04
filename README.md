@@ -41,12 +41,18 @@ inside a folder named `Blip.Bot.Project`, it will create a `.sln` with two proje
     |   |   |__📃{YourModelClasses.cs}
     |   |   |__📃{...}
     |   |__📁Services
-    |   |   |__📃{YourServicesAndInterfaces.cs}
+    |   |   |__📃{YourServices.cs}
+    |   |__📁Interfaces
+    |   |   |__📃{YourInterfaces.cs}
+    |   |__📁Middleware
+    |   |   |__📃{YourMiddlewareFiles.cs}
     |   |__📃MySettings.cs
     |   |__📃Startup.cs
     |   |__📃appsettings.json
     |__📁Blip.Api.Template.Services // (If needed) The project to use for 3rd party APIs to be consumed
     |   |__{Recommended to follow similar structure from the above project}
+    |__📁Blip.Api.Template.Tests // It is strongly suggested that you try to cover most parts of your code
+    |   |__{YourTestsFiles.cs}
     |__⚙️.editorconfig
 ```
 
@@ -56,6 +62,29 @@ To uninstall the template from your local machine, use the command
 dotnet new -u Blip.Api.Template
 ```
 Your current projects that already use the template **will not** be affected.
+
+## Recommended Packages
+This template comes bundled with a few highly recommended packages, such as [Blip.HttpClient](https://github.com/lfmundim/Blip.HttpClient), [RestEase](https://github.com/canton7/RestEase), [Serilog](https://github.com/serilog/serilog) and [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore). Those packages' repositories do a great job at explaining what they do, and it is strongly recommended that you familiarize yourself with them.
+
+Furthermore, I will list some other interesting packages:
+* For testing:
+    * [Shouldly](https://github.com/shouldly/shouldly): *Assert* library that makes it easy to read and understand tests assertions. For example:
+    ```cs
+    bex.Reason.Description.ShouldBe("The requested resource was not found");
+    getResource.ShouldNotBeNull();
+    exceptionThrown.ShouldBeTrue();
+    ```
+    * [XUnit](https://github.com/xunit/xunit): Widely used Testing Framework for .NET
+    * [NSubstitute](https://github.com/nsubstitute/NSubstitute): Library that allows the mocking of 3rd party (or 1st party) services that act like *black boxes*, meaning that you can't access their source code and therefore it is not up to you (or not interesting for you) to test it, but you still need to verify if the required methods are *at least* being called. Note that, as it is a substitute, the actual method *will not* be called, meaning that it *will not* access any external sources. For example:
+    ```cs
+    Serilog.ILogger _logger = Substitute.For<ILogger>();
+    // <...>
+    // Substitute call that will not, in fact, log anything anywhere
+    _logger.Received(1).Information(Arg.Any<string>(), Arg.Any<string>()); 
+    // Checks if the Serilog.ILogger.Information method was called EXACTLY one time with two params, where both of them are strings
+    ```
+* For logging:
+    * [RestingLogger](https://github.com/lfmundim/RestingLogger): easy-to-use RestEase-powered library that logs every request sent and response received from external APIs. Optimized and tested using Serilog while logging on SEQ. **Note: might not work on other architectures.**
 
 ## Feature Roadmap
 * Basic controller for external link tracking
