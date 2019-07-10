@@ -24,17 +24,17 @@ namespace Blip.Api.Template.Controllers
         private const string EmailRegex = "([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9_-]+)";
         private readonly IDataValidator _dataValidator;
         private readonly ILogger _logger;
-        private readonly IConfiguration _configuration;
         private readonly IDateTimeValidator _dateValidator;
         private readonly ISmallTalksDetector _smallTalksDetector;
+        private MySettings _settings;
 
-        public ValidateController(IDataValidator dataValidator, ILogger logger, IConfiguration configuration, IDateTimeValidator dateValidator, ISmallTalksDetector smallTalksDetector)
+        public ValidateController(IDataValidator dataValidator, ILogger logger, IDateTimeValidator dateValidator, ISmallTalksDetector smallTalksDetector, MySettings settings)
         {
             _dataValidator = dataValidator;
             _logger = logger;
-            _configuration = configuration;
             _dateValidator = dateValidator;
             _smallTalksDetector = smallTalksDetector;
+            _settings = settings;
         }
 
         [HttpPost("CpfCnpj")]
@@ -252,11 +252,8 @@ namespace Blip.Api.Template.Controllers
 
         private string TryToExtractName(string text)
         {
-            var cleanNamePattern = _configuration["NameConfig:CleanNameRegexPattern"];
-            byte[] cannotBeNamePatternbytes = Encoding.Default.GetBytes(_configuration["NameConfig:CannotBeNameWordPattern"]);
-
-            var cannotBeNamePattern = Encoding.UTF8.GetString(cannotBeNamePatternbytes);
-
+            var cleanNamePattern = _settings.NameConfig.CleanNameRegexPattern;
+            
             try
             {
                 var inputArr = text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
@@ -281,7 +278,7 @@ namespace Blip.Api.Template.Controllers
                 foreach (var word in nameArr)
                 {
 
-                    if (!Regex.IsMatch(word, cleanNamePattern) && !Regex.IsMatch(word, cannotBeNamePattern) && word.Length > 1)
+                    if (!Regex.IsMatch(word, cleanNamePattern)  && word.Length > 1)
                     {
                         value.Append(" ").Append(word.ToLower().Substring(0, 1).ToUpper()).Append(word.ToLower().Substring(1).ToLower());
                     }

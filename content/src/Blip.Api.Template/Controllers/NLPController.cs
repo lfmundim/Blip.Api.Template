@@ -22,18 +22,15 @@ namespace Blip.Api.Template.Controllers
     public class NLPController : ControllerBase
     {
         private readonly ILogger _logger;
-        private readonly IConfiguration _configuration;
         private readonly ISmallTalksDetector _smallTalksDetector;
+        private MySettings _settings { get; set; }
 
-        private string _contentProviderBaseUrl { get; set; }
-        private double _confidenceThresholdDefault { get; set; }
-        public NLPController(ILogger logger, IConfiguration configuration, ISmallTalksDetector smallTalksDetector)
+        public NLPController(ILogger logger, ISmallTalksDetector smallTalksDetector, MySettings settings)
         {
             _logger = logger;
-            _configuration = configuration;
-            _contentProviderBaseUrl = _configuration.GetSection("ContentProvider:BaseUrl").Value;
             _smallTalksDetector = smallTalksDetector;
-            _confidenceThresholdDefault = double.Parse(_configuration.GetSection("ContentProvider:confidenceThresholdDefault").Value, NumberStyles.Any, CultureInfo.InvariantCulture);
+            _settings = settings;
+            
         }
 
 
@@ -43,17 +40,18 @@ namespace Blip.Api.Template.Controllers
         {
             try
             {
+                
                 var validNumber = double.TryParse(confidenceThreshold, NumberStyles.Any, CultureInfo.InvariantCulture, out double currentConfidenceTreshold);
 
                 var cleanInputParsed = bool.TryParse(cleanInputBeforeAnalysis, out bool cleanInput);
                 cleanInput = cleanInputParsed ? cleanInput : true;
 
-                currentConfidenceTreshold = currentConfidenceTreshold == 0 ? _confidenceThresholdDefault : currentConfidenceTreshold;
+                currentConfidenceTreshold = currentConfidenceTreshold == 0 ? double.Parse(_settings.ContentProvider.ConfidenceThresholdDefault, NumberStyles.Any, CultureInfo.InvariantCulture) : currentConfidenceTreshold;
 
-                var botId = _configuration.GetSection("BlipConfigurations:BotIdentifier").Value;
-                var accessKey = _configuration.GetSection("BlipConfigurations:BotAccessKey").Value;
+                var botId = _settings.BlipBotSettings.Identifier;
+                var accessKey = _settings.BlipBotSettings.AccessKey;
 
-                using (var client = RestClient.For<IContentProviderAPI>(_contentProviderBaseUrl))
+                using (var client = RestClient.For<IContentProviderAPI>(_settings.ContentProvider.BaseUrl))
                 {
                     client.AuthorizationKey = $"Key {BlipHelper.GetBotAuthorization(botId, accessKey)}";
 

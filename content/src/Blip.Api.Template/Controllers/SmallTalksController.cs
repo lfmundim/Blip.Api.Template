@@ -15,13 +15,12 @@ namespace Blip.Api.Template.Controllers
     public class SmallTalksController : ControllerBase
     {
         private readonly ISmallTalksDetector _smallTalksDetector;
-        private Dictionary<string, List<string>> _smallTalkIntentions { get; set; }
+        private MySettings _settings { get; set; }
 
-        public SmallTalksController(ISmallTalksDetector smallTalksDetector, IConfiguration configuration)
+        public SmallTalksController(ISmallTalksDetector smallTalksDetector, MySettings settings)
         {
             _smallTalksDetector = smallTalksDetector;
-            _smallTalkIntentions = configuration.GetSection("SmallTalksConfig").Get<Dictionary<string, List<string>>>();
-
+            _settings = settings;
         }
 
         [HttpPost]
@@ -43,7 +42,7 @@ namespace Blip.Api.Template.Controllers
 
                     foreach (var item in result.Matches)
                     {
-                        foreach(var dict in _smallTalkIntentions)
+                        foreach(var dict in _settings.SmallTalksConfig)
                         {
                             if(dict.Value.Contains(item.SmallTalk) && !smallTalksDetected.Contains(dict.Key))
                             {

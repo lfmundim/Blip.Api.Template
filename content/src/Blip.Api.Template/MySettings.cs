@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Blip.Api.Template
 {
@@ -12,6 +14,30 @@ namespace Blip.Api.Template
         /// </summary>
         [JsonProperty("BlipBotSettings")]
         public BlipBotSettings BlipBotSettings { get; set; }
+
+        [JsonProperty("ContentProvider")]
+        public ContentProviderSettings ContentProvider { get; set; }
+
+        [JsonProperty("SmallTalksConfig")]
+        public Dictionary<string, List<string>> SmallTalksConfig { get; set; }
+
+        [JsonProperty("NameConfig")]
+        public NameConfig NameConfig { get; set; }
+    }
+
+
+    public class NameConfig
+    {
+        [JsonProperty("CleanNameRegexPattern")]
+        public string CleanNameRegexPattern { get; set; }
+    }
+
+    public class ContentProviderSettings
+    {
+        [JsonProperty("BaseUrl")]
+        public string BaseUrl { get; set; }
+        [JsonProperty("confidenceThresholdDefault")]
+        public string ConfidenceThresholdDefault { get; set; } = "0.6";
     }
 
     public class BlipBotSettings
@@ -27,11 +53,5 @@ namespace Blip.Api.Template
         /// </summary>
         [JsonProperty("AccessKey")]
         public string AccessKey { get; set; }
-
-        /// <summary>
-        /// BLiP's bot Authorization Key
-        /// </summary>
-        [JsonProperty("Authorization")]
-        public string Authorization { get; set; }
     }
 }
