@@ -33,7 +33,7 @@ namespace Blip.Api.Template
             var settings = Configuration.GetSection("Settings").Get<MySettings>();
 
             // Adds BLiP's Json Serializer to use on BLiP's Builder
-            services.AddMvc().AddJsonOptions(options =>
+            services.AddMvc().AddNewtonsoftJson(options =>
             {
                 foreach (var settingsConverter in JsonNetSerializer.Settings.Converters)
                 {
