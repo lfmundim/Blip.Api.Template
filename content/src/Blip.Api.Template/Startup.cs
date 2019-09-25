@@ -1,4 +1,5 @@
-﻿using Blip.Api.Template.Models;
+﻿using Blip.Api.Template.Middleware;
+using Blip.Api.Template.Models;
 using Blip.Api.Template.Services;
 using Blip.HttpClient.Extensions;
 using Lime.Protocol;
@@ -7,6 +8,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Exceptions;
 using Swashbuckle.AspNetCore.Swagger;
@@ -64,20 +67,24 @@ namespace Blip.Api.Template
             // Swagger
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Blip.Api.Template", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Blip.Api.Template", Version = "v1" });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             // Swagger
             app.UseSwagger();
@@ -87,7 +94,16 @@ namespace Blip.Api.Template
                 c.SwaggerEndpoint("./swagger/v1/swagger.json", "Blip.Api.Template V1");
             });
 
-            app.UseMvc();
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
