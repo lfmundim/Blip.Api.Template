@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -38,6 +39,11 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blip.Api.Template.Facades\Blip.Api.Template.Facades.csproj" />
+    <ProjectReference Include="..\Blip.Api.Template.Models\Blip.Api.Template.Models.csproj" />
   </ItemGroup>
 
 </Project>

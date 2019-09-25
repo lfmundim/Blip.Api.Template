@@ -1,4 +1,7 @@
-﻿namespace Blip.Api.Template.Models.Ui
+﻿using System.Collections.Generic;
+using Blip.Api.Template.Models.UI;
+
+namespace Blip.Api.Template.Models.Ui
 {
     /// <summary>
     /// Class to use data from appsettings.json "Settings" field
@@ -11,26 +14,13 @@
         public string ApiVersion { get; set; }
 
         /// <summary>
-        /// BLiP's bot identifier and access key
+        /// BLiP's Bots Authorization Keys
         /// </summary>
         public BlipBotSettings BlipBotSettings { get; set; }
-    }
-
-    public class BlipBotSettings
-    {
-        /// <summary>
-        /// BLiP's bot identifier
-        /// </summary>
-        public string Identifier { get; set; }
 
         /// <summary>
-        /// BLiP's bot access key
+        /// Sets wether or not the API should check for Bot's permission
         /// </summary>
-        public string AccessKey { get; set; }
-
-        /// <summary>
-        /// BLiP's bot Authorization Key
-        /// </summary>
-        public string Authorization { get; set; }
+        public bool CheckAuthorizationKey { get; set; }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Blip.Api.Template.Middleware;
+﻿using Blip.Api.Template.Facades;
+using Blip.Api.Template.Facades.Interfaces;
+using Blip.Api.Template.Middleware;
 using Blip.Api.Template.Models;
-using Blip.Api.Template.Services;
-using Blip.HttpClient.Extensions;
-using Lime.Protocol;
+using Blip.Api.Template.Models.Ui;
 using Lime.Protocol.Serialization.Newtonsoft;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,9 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Exceptions;
-using Swashbuckle.AspNetCore.Swagger;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -22,6 +20,11 @@ namespace Blip.Api.Template
 {
     public class Startup
     {
+        private const string SWAGGERFILE_PATH = "./swagger/v1/swagger.json";
+        private const string API_VERSION = "v1";
+        private const string SETTINGS_SECTION = "Settings";
+        private const string APPLICATION_KEY = "Application";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,7 +36,7 @@ namespace Blip.Api.Template
         public void ConfigureServices(IServiceCollection services)
         {
             // Parsing appsettings into class
-            var settings = Configuration.GetSection("Settings").Get<MySettings>();
+            var settings = Configuration.GetSection(SETTINGS_SECTION).Get<ApiSettings>();
 
             // Adds BLiP's Json Serializer to use on BLiP's Builder
             services.AddMvc().AddNewtonsoftJson(options =>
@@ -47,28 +50,21 @@ namespace Blip.Api.Template
             // Dependency injection
             services.AddSingleton(settings);
             services.AddSingleton(settings.BlipBotSettings);
+            services.AddSingleton<IAuthorizationFacade, AuthorizationFacade>();
 
             // SERILOG settings
             services.AddSingleton<ILogger>(new LoggerConfiguration()
                      .ReadFrom.Configuration(Configuration)
                      .Enrich.WithMachineName()
-                     .Enrich.WithProperty("Application", "Blip.Api.Template")
+                     .Enrich.WithProperty(APPLICATION_KEY, Constants.PROJECT_NAME)
                      .Enrich.WithExceptionDetails()
                      .CreateLogger());
-
-            // BLiP services registration
-            var documentList = new List<Document>();
-            documentList.Add(new UserContext());
-            services.DefaultRegister(settings.BlipBotSettings.Authorization, documentList);
-
-            // Project specific Services
-            services.AddSingleton<IContextManager, ContextManager>();
 
             // Swagger
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Blip.Api.Template", Version = "v1" });
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                c.SwaggerDoc(API_VERSION, new OpenApiInfo { Title = Constants.PROJECT_NAME, Version = API_VERSION });
+                var xmlFile = Assembly.GetExecutingAssembly().GetName().Name + Constants.XML_EXTENSION;
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
@@ -84,14 +80,15 @@ namespace Blip.Api.Template
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMiddleware<AuthorizationMiddleware>();
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             // Swagger
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.RoutePrefix = "";
-                c.SwaggerEndpoint("./swagger/v1/swagger.json", "Blip.Api.Template V1");
+                c.RoutePrefix = string.Empty;
+                c.SwaggerEndpoint(SWAGGERFILE_PATH, Constants.PROJECT_NAME + API_VERSION);
             });
 
             app.UseHttpsRedirection();

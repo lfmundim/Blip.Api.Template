@@ -1,12 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+
 using Blip.Api.Template.Models;
+
 using Lime.Protocol;
+
 using Microsoft.AspNetCore.Http;
+
 using Newtonsoft.Json;
+
 using Serilog;
 
 namespace Blip.Api.Template.Middleware
@@ -45,11 +48,11 @@ namespace Blip.Api.Template.Middleware
             if (exception is RestEase.ApiException apiException)
             {
                 context.Response.StatusCode = (int)apiException.StatusCode;
-                _logger.Error(apiException, "[{@user}] Error: {@exception}", context.Request.Headers["X-BLIP-USER"], exception.Message);
+                _logger.Error(apiException, "[{@user}] Error: {@exception}", context.Request.Headers[Constants.BLIP_USER_HEADER], exception.Message);
             }
             else
             {
-                _logger.Error(exception, "[{@user}] Error: {@exception}", context.Request.Headers["X-BLIP-USER"], exception.Message);
+                _logger.Error(exception, "[{@user}] Error: {@exception}", context.Request.Headers[Constants.BLIP_USER_HEADER], exception.Message);
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
 
