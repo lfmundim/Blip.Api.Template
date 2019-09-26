@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Blip.Api.Template</id>
-    <version>2.1.6</version>
+    <version>4.0.0</version>
     <description>
       Starts a new BLiP API project
     </description>
     <authors>Lucas Mundim</authors>
 	<releaseNotes>
-		Updated to dotnet 2.1
+		Updated to dotnet 3.0; Changed Architecture to layered
 	</releaseNotes>
     <packageTypes>
       <packageType name="Template" />
