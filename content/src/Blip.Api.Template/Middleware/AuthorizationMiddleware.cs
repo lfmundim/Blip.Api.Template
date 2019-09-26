@@ -12,6 +12,9 @@ using Serilog;
 
 namespace Blip.Api.Template.Middleware
 {
+    /// <summary>
+    /// Wraps all controller actions with a header verification to avoid code repetition
+    /// </summary>
     public class AuthorizationMiddleware
     {
         private readonly RequestDelegate _next;

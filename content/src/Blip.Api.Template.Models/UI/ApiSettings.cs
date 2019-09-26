@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Blip.Api.Template.Models.UI;
+﻿using Blip.Api.Template.Models.UI;
 
 namespace Blip.Api.Template.Models.Ui
 {

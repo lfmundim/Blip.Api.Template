@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Blip.Api.Template.Facades.Interfaces;
+﻿using Blip.Api.Template.Facades.Interfaces;
 using Blip.Api.Template.Models;
 using Blip.Api.Template.Models.Ui;
+
 using Microsoft.AspNetCore.Http;
 
 namespace Blip.Api.Template.Facades
