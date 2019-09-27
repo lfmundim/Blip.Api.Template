@@ -3,6 +3,8 @@
 
 ## This template aims to kickstart the development of an API to be used alongside BLiP's Builder feature
 
+### **Update Notice:** From version 4.0 on, the template will use `.NET Core 3.0`
+
 ## Installation
 If you already have `dotnet` installed, you can install this template with the command
 ```sh
@@ -31,26 +33,41 @@ inside a folder named `Blip.Bot.Project`, it will create a `.sln` with two proje
 
 ## File Structure
 ```cs
- 📁Blip.Api.Template // assuming your folder is called Blip.Api.Template. Whatever name you choose will replace all occurrences of that string in the sln
+ 📁Blip.Bot.Project // assuming your folder is called Blip.Bot.Project. Whatever name you choose will replace all occurrences of that string in the sln
  |__📁src
-    |__📁Blip.Api.Template // The Web API project Folder
-    |   |__📁Controllers
-    |   |   |__📃{YourControllers.cs}
+    |__📁Blip.Bot.Project // The Web API project Folder
+    |   |__📁Controllers // This will not be created anymore as no default Controllers are provided.
+    |   |   |__📃{YourControllers.cs} // You should definitelly create the folder yourself
     |   |   |__📃{...}
-    |   |__📁Models
-    |   |   |__📃{YourModelClasses.cs}
-    |   |   |__📃{...}
-    |   |__📁Services
-    |   |   |__📃{YourServices.cs}
-    |   |__📁Interfaces
-    |   |   |__📃{YourInterfaces.cs}
     |   |__📁Middleware
-    |   |   |__📃{YourMiddlewareFiles.cs}
+    |   |   |__📃{ErrorHandlingMiddleware.cs}
+    |   |   |__📃{AuthenticationMiddleware.cs}
+    |   |   |__📃{YourMiddlewares.cs}
+    |   |   |__📃{...}
     |   |__📃MySettings.cs
     |   |__📃Startup.cs
+    |   |__📃Program.cs
     |   |__📃appsettings.json
-    |__📁Blip.Api.Template.Services // (If needed) The project to use for 3rd party APIs to be consumed
-    |   |__{Recommended to follow similar structure from the above project}
+    |__📁Blip.Bot.Project.Facades // Project to use for any logic to be handled
+    |   |__📁Extensions // Recommended architecture
+    |   |   |__📃{ServiceCollectionExtensions.cs}
+    |   |   |__📃{YourExtensionFiles}
+    |   |__📁Interfaces // Recommended architecture
+    |   |   |__📃{IAuthorizationFacade.cs}
+    |   |   |__📃{YourInterfaceFiles}
+    |   |__📃{AuthorizationFacade.cs}
+    |   |__📃{YourServiceFiles}
+    |__📁Blip.Bot.Project.Services // (If needed) The project to use for 3rd party APIs to be consumed
+    |   |__📁Interfaces // Recommended architecture
+    |   |   |__📃{YourInterfaceFiles}
+    |   |__📃{YourServiceFiles}
+    |__📁Blip.Bot.Project.Models // Models to be used by the Solution
+    |   |__📁UI // Models directly used by the API project
+    |   |   |__📃{ApiSettings.cs}
+    |   |   |__📃{BlipBotSettings.cs}
+    |   |   |__📃{YourUIModels}
+    |   |__📃{Constants.cs}
+    |   |__📃{YourSharedModels}
     |__📁Blip.Api.Template.Tests // It is strongly suggested that you try to cover most parts of your code
     |   |__{YourTestsFiles.cs}
     |__⚙️.editorconfig
