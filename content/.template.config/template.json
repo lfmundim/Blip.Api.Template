@@ -15,6 +15,14 @@
 	  "description": "Defines the name of the Services project",
 	  "FileRename": "Blip.Api.Template.Services",
 	  "defaultValue": "Blip.Api.Template.Services"
+    },
+    "sonarqube-guid":{
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "sonarqube-guid",
+      "parameters": {
+        "format":"D"
+      }
     }
   },
   "sourceName": "Blip.Api.Template",
