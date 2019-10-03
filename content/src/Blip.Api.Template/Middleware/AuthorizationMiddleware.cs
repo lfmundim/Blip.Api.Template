@@ -61,7 +61,7 @@ namespace Blip.Api.Template.Middleware
             }
         }
 
-        private bool IsHealthCheck(HttpContext context) => !context.Request.Path.Value.StartsWith(HEALTH_CHECK_PATH, StringComparison.OrdinalIgnoreCase);
+        private bool IsHealthCheck(HttpContext context) => context.Request.Path.Value.StartsWith(HEALTH_CHECK_PATH, StringComparison.OrdinalIgnoreCase);
         private bool IsAuthorized(HttpContext context) => _settings.CheckAuthorizationKey && !_authorizationLogic.IsValidBotKey(context);
     }
 }
