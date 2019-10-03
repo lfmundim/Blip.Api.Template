@@ -16,10 +16,42 @@
 	  "FileRename": "Blip.Api.Template.Services",
 	  "defaultValue": "Blip.Api.Template.Services"
     },
-    "sonarqube-guid":{
+    "sonarqube-guid-ui":{
       "type": "generated",
       "generator": "guid",
-      "replaces": "sonarqube-guid",
+      "replaces": "sonarqube-guid-ui",
+      "parameters": {
+        "format":"D"
+      }
+    },
+    "sonarqube-guid-facades":{
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "sonarqube-guid-facade",
+      "parameters": {
+        "format":"D"
+      }
+    },
+    "sonarqube-guid-models":{
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "sonarqube-guid-model",
+      "parameters": {
+        "format":"D"
+      }
+    },
+    "sonarqube-guid-services":{
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "sonarqube-guid-services",
+      "parameters": {
+        "format":"D"
+      }
+    },
+    "sonarqube-guid-tests":{
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "sonarqube-guid-tests",
       "parameters": {
         "format":"D"
       }
