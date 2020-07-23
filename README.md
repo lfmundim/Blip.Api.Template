@@ -1,3 +1,5 @@
+# DEPRECATED: This template is no longer maintained, in favour of [the new Kubernetes enabled one](https://github.com/lfmundim/Blip.Api.Template.K8s)
+
 # BLiP.API.Template [![Build Status](https://travis-ci.org/lfmundim/Blip.Api.Template.svg?branch=master)](https://travis-ci.org/lfmundim/Blip.Api.Template) [![Nuget](https://buildstats.info/nuget/Blip.Api.Template)](https://www.nuget.org/packages/blip.api.template) [![GitHub stars](https://img.shields.io/github/stars/lfmundim/Blip.Api.Template.svg)](https://github.com/lfmundim/Blip.Api.Template/stargazers)
 
 
